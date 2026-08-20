@@ -1,5 +1,5 @@
 /**
- * This class creates the app to order a pizza
+ * This class creates the GUI to order a pizza
  * 
  * @author sailaborn
  * @version 1.0
