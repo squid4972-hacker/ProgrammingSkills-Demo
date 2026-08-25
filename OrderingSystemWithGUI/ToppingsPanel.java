@@ -3,7 +3,7 @@ import java.awt.*;
 
 
 /**
- * This class like designs panel for topping and has a getter for total cost of toppings selected.
+ * This class designs panels for topping and has a method for retrieving the total cost of toppings selected.
  * 
  * @author sailaborn
  * @version 1.0
