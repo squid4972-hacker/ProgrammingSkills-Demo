@@ -1,10 +1,8 @@
 """
-Author: Enaya S. Laborn
+Author: Enaya L.
 Date: 3 September 2026
-This program creates a lightweight policy engine for a network gateway.
-The gateway receives incoming network packets containing an IP address,
-target port, and access request flag. Your script must process a batch
-of incoming requests and print an access verdict (ALLOW, DENY, or ALERT).
+This program creates a lightweight policy engine for a network gateway. The gateway receives incoming network packets containing an 
+IP address, target port, and access request flag. Your script must process a batch of incoming requests and print an access verdict (ALLOW, DENY, or ALERT).
 
 """
 
@@ -47,19 +45,3 @@ print(f"Total Allowed: {allowed_ct}")
 print(f"Total Denied: {denied_ct}")
 print(f"Total Alerts: {alerts_ct}")
 
-
-
-
-"""  
-for count in range(5):
-    print(count + 1, end = " ")
-print("\n")
-for count in range(1, 4):
-    print(count + 1, end = " ")
-print("\n")
-for count in range(1, 6, 2):
-    print(count + 1, end = " ")
-print("\n")
-for count in range(7, 0, -1):
-    print(count + 1, end = " ")
-"""
