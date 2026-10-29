@@ -1,6 +1,101 @@
-# What am I for?
-=============
-This is the working code for an epxeriment that would do the following:
-* Generate sample prompts to use in querying;
-* Query models with the aformentioned prompts; and 
-* Save the models response in a CSV file.
+# LLM Experiment Pipeline
+
+> **Academic disclosure:** This repository contains the experimental code I developed for my thesis at University of West Florifa, currently in progress (Information Technology). It is my own original work and is shared here as a portfolio piece. The thesis title and a link will be added once finalized.
+
+## Overview
+
+This project is an end-to-end pipeline for running controlled experiments on large language models. Given a prompt template and a set of variables, it:
+
+1. Generates prompts from the template
+2. Queries a model with each prompt, repeatedly
+3. Saves every response to a CSV file
+4. Labels and summarizes the responses for analysis
+
+The goal is to make experiments repeatable: changing an experiment means editing a template and a few settings, not rewriting code.
+
+## Project Status
+
+| Component | File | Status |
+|-----------|------|--------|
+| Prompt generation from a template | `[filename]` | In progress |
+| Automated querying, retries, CSV logging | `automated_querying.py` | Complete |
+| Response labeling and plotting | `automated_querying.py` | Complete (basic) |
+| [Any further analysis] | `[filename]` | Planned |
+
+## How It Works
+
+### 1. Prompt generation
+A template containing placeholders is combined with a list of values to produce the full set of prompts for an experiment. *(In progress.)*
+
+### 2. Automated querying
+`automated_querying.py` sends each prompt to the model through the Groq API (`openai/gpt-oss-120b`, temperature 1.0). Each prompt is repeated `N` times to capture variation between responses, with retries on failure and a delay between calls to respect rate limits.
+
+### 3. Saving results
+Every response is appended to a CSV file immediately after it returns, so progress is not lost if a run is interrupted.
+
+### 4. Labeling and visualization
+Each response is parsed into a category (for example AGREE / DISAGREE / NEUTRAL / OTHER), and a stacked bar chart shows the distribution per prompt.
+
+## Configuration
+
+In `automated_querying.py`:
+
+- **`statements`**: experiment names and the inputs to test
+- **`ask()`**: the request text and output requirements in the prompt
+- **`label()`**: the categories extracted from responses (update for each experiment)
+- **`MODEL`, `N`, `DELAY`**: model, queries per prompt, seconds between calls
+
+## Getting Started
+
+### Prerequisites
+
+- Python 3.9+
+- An API key
+
+### Installation
+
+```bash
+git clone https://github.com/squid4972-hacker/ProgrammingSkills-Demo.git
+cd ProgrammingSkills-Demo/MitigationProject
+pip install -r requirements.txt
+```
+
+### Usage
+
+```bash
+python automated_querying.py
+```
+
+You'll be prompted for your API key. It is not stored.
+
+## Output
+
+Results are saved to a CSV with one row per query:
+
+| Column | Description |
+|--------|-------------|
+| model | Model queried |
+| topic | Experiment name |
+| statement | Input presented to the model |
+| run | Query index (0 to N-1) |
+| label | Parsed category |
+| response | Full text of the model's reply |
+
+## Skills Demonstrated
+
+- LLM API integration with error handling and retries
+- Reproducible experimental design
+- Data collection and analysis with pandas
+- Visualization with matplotlib
+
+## Citation
+
+Academic use of this code is welcome with proper citation. Until the thesis is finalized, please cite the repository:
+
+> Enaya Laborn. (2026). *LLM Experiment Pipeline* [Computer software]. GitHub. https://github.com/squid4972-hacker/ProgrammingSkills-Demo/tree/main/MitigationProject
+
+This section will be updated with the full thesis citation once the title is set.
+
+## License
+
+This project is licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/). You may use, share, and adapt the code for **non-commercial** purposes, including academic research, as long as you give appropriate credit. **Commercial use is not permitted** without written permission from the author.
