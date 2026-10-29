@@ -29,14 +29,14 @@ def letter_grade(score):
 FILENAME = "quizScore.txt"
 NUM_STUDENTS = 5 # the number of test takers; change this if you want to test more or less students 
 
-open(FILENAME, "w").close()  # we need to start with a clean file
+open(FILENAME, "w").close()  # we need to start with a clean file, so no leftover artifacts
 
 for student in range(NUM_STUDENTS):
     print(f"\nStudent {student + 1} of {NUM_STUDENTS}")
     name = input("Please enter your name: ")
     grade = get_int("Enter your grade level (1-3): ", 1, 3)
 
-    score = 0 # initialize score
+    score = 0 # this initializes the score
     missed = []
     for q in range(1, 5):
         text, answer = make_question(grade)
@@ -49,7 +49,7 @@ for student in range(NUM_STUDENTS):
             missed.append((text, answer))
 
     print(f"You scored {score}/4.")
-    if missed:  # personal aditional is the option to review missed questions help the children learn
+    if missed:  # this gives the option to review missed questions help the children learn
         print("Review:")
         for text, answer in missed:
             print(f"  {text} = {answer}")
@@ -67,7 +67,7 @@ with open(FILENAME, "r") as f:
         scores.append((name, score))
         print(f"Name: {name} | Grade Level: {grade} | Score: {score} | Grade: {letter_grade(score)}")
 
-# An extra element this displays the class total stats
+# This displays the class total stats
 average = sum(s for _, s in scores) / len(scores)
 top_name, top_score = max(scores, key=lambda x: x[1])
 print(f"\nClass average: {average:.2f}/4")
