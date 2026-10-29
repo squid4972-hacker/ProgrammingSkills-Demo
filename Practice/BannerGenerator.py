@@ -14,6 +14,14 @@ deptName = input("Please enter the department's name: ")
 serverNum = input("Please enter the Workstation/Server ID's number: ")
 uptime = input("Please enter the uptime(in hours): ")
 uptimeDays = int(uptime) / 24  #Calculate uptime in days by dividing the uptime in hours by 24
+"""
+
+Demonstration how disorganized it looks to use concatenate instead of f-string
+print((f'#' * 50) + '\n' + operatorName + '\n' + deptName +
+      '\n' + serverNum + '\n' + "Uptime (indays): " + str(uptimeDays) + '\n' + ('#' * 50))
+See better solution using f-string below
+
+"""
 
 print(f"""{'#' * 50} 
 Operator Name: {operatorName}
